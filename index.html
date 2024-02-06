@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Bootstrap Multiple Item Product Carousel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style>
+body {
+	background: #e2eaef;
+	font-family: "Open Sans", sans-serif;
+}
+h2 {
+	color: #000;
+	font-size: 26px;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+	position: relative;
+	margin: 30px 0 60px;
+}
+h2::after {
+	content: "";
+	width: 100px;
+	position: absolute;
+	margin: 0 auto;
+	height: 4px;
+	border-radius: 1px;
+	background: #7ac400;
+	left: 0;
+	right: 0;
+	bottom: -20px;
+}
+.carousel {
+	margin: 50px auto;
+	padding: 0 70px;
+}
+.carousel .item {
+	color: #747d89;
+	min-height: 325px;
+	text-align: center;
+	overflow: hidden;
+}
+.carousel .thumb-wrapper {
+	padding: 25px 15px;
+	background: #fff;
+	border-radius: 6px;
+	text-align: center;
+	position: relative;
+	box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+}
+.carousel .item .img-box {
+	height: 120px;
+	margin-bottom: 20px;
+	width: 100%;
+	position: relative;
+}
+.carousel .item img {	
+	max-width: 100%;
+	max-height: 100%;
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
+.carousel .item h4 {
+	font-size: 18px;
+}
+.carousel .item h4, .carousel .item p, .carousel .item ul {
+	margin-bottom: 5px;
+}
+.carousel .thumb-content .btn {
+	color: #7ac400;
+	font-size: 11px;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: none;
+	border: 1px solid #7ac400;
+	padding: 6px 14px;
+	margin-top: 5px;
+	line-height: 16px;
+	border-radius: 20px;
+}
+.carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
+	color: #fff;
+	background: #7ac400;
+	box-shadow: none;
+}
+.carousel .thumb-content .btn i {
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 5px;
+}
+.carousel .item-price {
+	font-size: 13px;
+	padding: 2px 0;
+}
+.carousel .item-price strike {
+	opacity: 0.7;
+	margin-right: 5px;
+}
+.carousel-control-prev, .carousel-control-next {
+	height: 44px;
+	width: 40px;
+	background: #7ac400;	
+	margin: auto 0;
+	border-radius: 4px;
+	opacity: 0.8;
+}
+.carousel-control-prev:hover, .carousel-control-next:hover {
+	background: #78bf00;
+	opacity: 1;
+}
+.carousel-control-prev i, .carousel-control-next i {
+	font-size: 36px;
+	position: absolute;
+	top: 50%;
+	display: inline-block;
+	margin: -19px 0 0 0;
+	z-index: 5;
+	left: 0;
+	right: 0;
+	color: #fff;
+	text-shadow: none;
+	font-weight: bold;
+}
+.carousel-control-prev i {
+	margin-left: -2px;
+}
+.carousel-control-next i {
+	margin-right: -4px;
+}		
+.carousel-indicators {
+	bottom: -50px;
+}
+.carousel-indicators li, .carousel-indicators li.active {
+	width: 10px;
+	height: 10px;
+	margin: 4px;
+	border-radius: 50%;
+	border: none;
+}
+.carousel-indicators li {	
+	background: rgba(0, 0, 0, 0.2);
+}
+.carousel-indicators li.active {	
+	background: rgba(0, 0, 0, 0.6);
+}
+.carousel .wish-icon {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 99;
+	cursor: pointer;
+	font-size: 16px;
+	color: #abb0b8;
+}
+.carousel .wish-icon .fa-heart {
+	color: #ff6161;
+}
+.star-rating li {
+	padding: 0;
+}
+.star-rating i {
+	font-size: 14px;
+	color: #ffc000;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$(".wish-icon i").click(function(){
+		$(this).toggleClass("fa-heart fa-heart-o");
+	});
+});	
+</script>
+</head>
+<body>
+<div class="container-xl">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Featured <b>Products</b></h2>
+            <div class="language-menu float-right">
+
+                <a href="" data-toggle="modal" data-target="" class="current-lang wishbtn"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 38px;">&nbsp;<span class="wishcount"></span></i></a>
+            </div>
+            <br>
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+			<!-- Carousel indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>   
+			<!-- Wrapper for carousel items -->
+			<div class="carousel-inner">
+				<div class="item carousel-item active">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/ipad.jpg" class="img-fluid" alt="">									
+								</div>
+								<div class="thumb-content">
+									<h4>Apple iPad</h4>									
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p>
+									<a href="#" class="btn btn-primary home-cart" data-name="Apple iPad" data-price="369.00" data-id="10">Add to Cart</a>
+								</div>						
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/headphone.jpg" class="img-fluid" alt="Headphone">
+								</div>
+								<div class="thumb-content">
+									<h4>Sony Headphone</h4>									
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+									<a href="#" class="btn btn-primary home-cart" data-name="Sony Headphone" data-price="23.00" data-id="11">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>		
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/macbook-air.jpg" class="img-fluid" alt="Macbook">
+								</div>
+								<div class="thumb-content">
+									<h4>Macbook Air</h4>									
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+										</ul>
+									</div>
+									<p class="item-price"><strike>$899.00</strike> <b>$649.00</b></p>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a>
+                                     -->
+									<a href="#" class="btn btn-primary home-cart" data-name="Macbook Air" data-price="649.00" data-id="12">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>								
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/nikon.jpg" class="img-fluid" alt="Nikon">
+								</div>
+								<div class="thumb-content">
+									<h4>Nikon DSLR</h4>									
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<p class="item-price"><strike>$315.00</strike> <b>$250.00</b></p>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a>
+                                     -->
+                                     <a href="#" class="btn btn-primary home-cart" data-name="Nikon DSLR" data-price="250.00" data-id="13">Add to Cart</a>
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="item carousel-item">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/play-station.jpg" class="img-fluid" alt="Play Station">
+								</div>
+								<div class="thumb-content">
+									<h4>Sony Play Station</h4>
+									<p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<a href="#" class="btn btn-primary">Add to Cart</a>
+								</div>						
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/macbook-pro.jpg" class="img-fluid" alt="Macbook">
+								</div>
+								<div class="thumb-content">
+									<h4>Macbook Pro</h4>
+									<p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a>
+                                     -->
+                                     <a href="#" class="btn btn-primary home-cart" data-name="Macbook Pro" data-price="869.00" data-id="154">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/speaker.jpg" class="img-fluid" alt="Speaker">
+								</div>
+								<div class="thumb-content">
+									<h4>Bose Speaker</h4>
+									<p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                                    <a href="#" class="btn btn-primary home-cart" data-name="Bose Speaker" data-price="99.00" data-id="44">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/galaxy.jpg" class="img-fluid" alt="Galaxy">
+								</div>
+								<div class="thumb-content">
+									<h4>Samsung Galaxy S8</h4>
+									<p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                                    <a href="#" class="btn btn-primary home-cart" data-name="Samsung Galaxy S8" data-price="569.00" data-id="447">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>						
+					</div>
+				</div>
+				<div class="item carousel-item">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/iphone.jpg" class="img-fluid" alt="iPhone">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple iPhone</h4>
+									<p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                                    <a href="#" class="btn btn-primary home-cart" data-name="Apple iPhone" data-price="349.00" data-id="747">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/canon.jpg" class="img-fluid" alt="Canon">
+								</div>
+								<div class="thumb-content">
+									<h4>Canon DSLR</h4>
+									<p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                                    <a href="#" class="btn btn-primary home-cart" data-name="Canon DSLR" data-price="250.00" data-id="99">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/pixel.jpg" class="img-fluid" alt="Pixel">
+								</div>
+								<div class="thumb-content">
+									<h4>Google Pixel</h4>
+									<p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                                    <a href="#" class="btn btn-primary home-cart" data-name="Google Pixel" data-price="418.00" data-id="69">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>	
+						<div class="col-sm-3">
+							<div class="thumb-wrapper">
+								<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+								<div class="img-box">
+									<img src="examples/images/products/watch.jpg" class="img-fluid" alt="Watch">
+								</div>
+								<div class="thumb-content">
+									<h4>Apple Watch</h4>
+									<p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
+									<div class="star-rating">
+										<ul class="list-inline">
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star"></i></li>
+											<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+										</ul>
+									</div>
+									<!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+                                    <a href="#" class="btn btn-primary home-cart" data-name="Apple Watch" data-price="330.00" data-id="89">Add to Cart</a>
+
+								</div>						
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Carousel controls -->
+			<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a class="carousel-control-next" href="#myCarousel" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+		</div>
+	</div>
+</div>
+</body>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+          <!-- Modal content-->
+          
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><img src="resources/images/header/wishlist.png" alt=""> Items in Wish List</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" method="post" id="crud-form">  
+            <!-- style="height:200px; -->
+             <div class="table-responsive modal-table">
+                  <table class="table table-bordered" id="table3">
+                                <thead>
+                                    <tr>
+                                    <th>No</th>                             
+                                    <th>Item</th>                             
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                        <tbody>  
+
+                                                
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                     </table>      
+                 </div>  
+
+
+                 <!-- <h4>Your Details</h4>
+                 <p><span class="mandatoryy">(*) is indicated for all mandatory fields</span></p>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                    <label class="col-md-4 control-label" for="typee">Delivery type 
+                        <span class="mandatoryy">*</span></label>
+                  <div class="col-md-6">
+                           
+            <input type="radio" name="deltype" required class="mode" id="Pikup" value="pickup"> Pickup
+            <input type="radio" name="deltype" required class="mode" id="Homedel" value="Home-delivery"> Home-Delivery<br>
+            <span style="display:none;" id="delcharge" class="delecharge text-danger">Delivery Charges Applicable</span>
+                    </div>
+                            </div>
+                            </div>
+                       
+                            
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="date">Date <span class="mandatoryy">*</span></label>
+                                <div class="col-md-6">
+                                    <input  id="date" name="date" type="text" placeholder="Enter Date.." list="" class="form-control" value=24-03-2023  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="time">Time <span class="mandatoryy">*</span></label>
+                                <div class="col-md-6">
+                                    <input id="order-time" name="time" type="time" placeholder="Enter Time.." list="" class="form-control" value="21:38:34" required>
+                                    <br>
+                                </div>
+                            </div>
+
+
+                           <div class="form-group">
+                                <label class="col-md-4 control-label" for="title">Name <span class="mandatoryy">*</span></label>
+                                <div class="col-md-6">
+                                    <input id="name" name="cname" type="text" placeholder="Enter Name.." list="ref" class="form-control" required>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="title">Mobile <span class="mandatoryy">*</span></label>
+                                <div class="col-md-6">
+                                    <input id="phone" name="phone" type="text" placeholder="Enter Mobile.." max="12" list="ref" class="form-control maxThirtyChars" required>
+                                    <span class="maxThirtyCharsd">  </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="title">Email Address <span class="mandatoryy">*</span></label>
+                                <div class="col-md-6">
+                                    <input id="email" name="email" type="text" placeholder="Enter Email..." list="ref" class="form-control" required>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="title">Remarks</label>
+                                <div class="col-md-6">
+                                    <textarea class="form-control" id="message" rows="5" placeholder="Enter Description..." name="message"></textarea>                                  
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <label class="col-md-4 control-label" for="title">Captcha</label>
+                            <div class="col-md-6">
+                            <input   required  type="text" name="code" id="code" class="form-control" placeholder="Enter Below Captcha . . .">
+                            </div>
+                            </div>
+
+
+                            <div class="form-group">
+                            <label class="col-md-4 control-label" for="title">  </label>
+                            <div class="col-md-6">
+                             <div class="capthe">
+                            <img src="captcha/get_captcha.php" alt="" id="captcha" height="50" />
+                            <img src="captcha/refresh.jpg" height="50" alt="" id="refresh" />
+                           </div>
+                            </div>
+                            </div> -->
+
+                           
+
+                             <div class="form-group">
+                            <div class="col-xs-5 col-xs-offset-3">
+                                <button type="submit" style="display:none;" id="send_order" class="btn btn-primary" name="submorder" >Make Order</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </div>
+                             <div class="col-xs-5 col-xs-offset-3" id="fmesage"></div>
+                            <input type="hidden" id="itemname" name="item">
+                        </div>
+              </form>
+        </div>       
+      </div>      
+    </div>
+  <!-- </div> -->
+
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script>
+    //local storage for add to cart by amt
+
+$( document ).ready(function() {
+
+
+  
+    var cartitems = [];
+
+$('.home-cart').click(function(){
+    //localStorage.clear();
+    // setTimeout(function(){ 
+    //             location.reload(true); 
+    //                 },50);
+    
+         var id = $(this).data('id');
+         var name=$(this).data('name');
+         var price=$(this).data('price'); 
+        
+         var stored = JSON.parse(localStorage.getItem("cart"));
+         //var len=localStorage.getItem("cart")));
+         //alert(len)
+         var exists = false;
+        if(stored != null)
+            cartitems = stored;
+            //console.log(cartitems);
+            $.each(cartitems, function(num, value ) {
+                //console.log(value);
+                var PId = value.split("|")[0];
+               // alert(id);
+                if(PId == id){
+                    cartitems[num] = id+"|"+(parseInt(value.split("|")[1])+1)+"|"+name+"|"+price;
+                    exists = true;
+                    //  $('[data-id='+PId+']').html('Already Added</p>');
+           
+           
+                    return false;
+                }
+            });
+            
+        if(!exists)
+        cartitems.push(id+"|"+1+"|"+name+"|"+price)
+        localStorage.setItem("cart", JSON.stringify(cartitems));
+        //alert(JSON.stringify(cartitems));
+       
+       var len=(JSON.parse(localStorage.getItem('cart'))).length
+
+       $('.wishcount').text(len);
+        $.toast({
+                heading: 'Success',
+                text: 'Added to Cart.',
+                icon: 'success',
+                position: 'top-right',
+                stack: false
+            })
+            
+       
+    });
+    
+    $('.wishbtn').on('click',function(e){
+       
+    $('#myModal').modal('show');
+    {
+         //append value into modal
+            
+        var items = JSON.parse(localStorage.getItem('cart'));
+        //alert(items);
+        $('.wishcount').text(items.length); 
+       //console.log(items);
+        if(items){
+         $('#myModal').find('.modal-table #table3 > tbody').empty()
+          $("#table3 >tfoot").empty()
+            for(i=0 ; i<items.length ; i++)
+            {
+             var item = items[i].split("|");
+            
+               //alert(items[0]);
+                console.log(item);
+                $('#myModal').find('.modal-table #table3 > tbody').append(`
+        
+                <tr>
+                <td class="idss">${i + 1}</td>                     
+                <input type="hidden" value="${item[0]}" name="id[]" id="book" class="bookd" value="">
+                
+                <td class="namee">${item[2]}
+                <input width="40%" type="hidden"  name="pname[]" id="name" value="${item[2]}">
+                </td>
+                <td class="row-price">${item[3]}<input type="hidden" name="price[]" value="${item[3]}" id="price" class="priced"> <td>
+                <input type="number" name="qty[]" min="1"   value="${item[1]}" class="qty form-control w-32"  data-id=${item[0]} >
+                </td>
+                </td>
+                <td class="row-total totaltd"> ${item[3] * item[1]}<input type="hidden" name="total[]" value="${item[3] * item[1]}" class=""> 
+                </td>
+                <td>
+                <a class="btn btn-danger delelclstrg" data-id=${item[0]} ><i style="color: #fff;" class="fa fa-trash"></i></a>
+                
+                </td>
+                </tr>`);
+               
+                CalculateGrandTotal1();      
+              
+            }
+            
+            $("#table3 >tfoot").append(`<tr>
+                    <td colspan=3></td>
+                    <td style="font-weight:600;font-size:18px;text-align:center;" id="granTotal" name="grandTottalz" colspan=3></td>
+                    </tr>`);
+                    CalculateGrandTotal1();
+        }
+        
+        if(items.length > 0){
+            //alert(items.length)
+            //$('.sbmtbtn');
+            $('#send_order').css('display','inline').show();
+            
+        }
+        else{
+            // alert(items.length)
+            $('.sbmtbtn').hide();
+        }
+
+    
+       
+    }
+    
+    
+   
+   
+   //delete value from cart and reset
+
+
+
+
+
+
+$('.delelclstrg').click(function(){
+
+    var items = localStorage.getItem("cart");
+   
+    var pathed=JSON.parse(items);
+    //alert(items);
+    //console.log(pathed)
+if (confirm('Are you sure want to delete?')) 
+{
+for (var i =0; i< pathed.length; i++) {
+    var a=pathed[i].split("|");
+    if(a[0]==$(this).data("id")){
+
+        pathed.splice(i,1)
+        //$(this).eq(i).remove(); 
+        $(this).parent().parent().fadeOut();
+        $(this).parent().parent().remove();
+        $('.wishcount').text(pathed.length); 
+        CalculateGrandTotal1();
+        
+        // if(pathed.length>0){
+        //     //alert()
+        //     $('.sbmtbtn').show();
+        //     $('.sbmtbtn').css('display','inline');
+        // }   
+    }
+  }
+  localStorage.setItem("cart",JSON.stringify(pathed));
+  }
+  else{
+
+
+  }
+   
+    
+   // alert()
+        
+    });
+    
+    
+    //on change price change
+    
+    $('.qty').change(function(){
+
+
+var items = JSON.parse(localStorage.getItem("cart"));
+for (var i =0; i< items.length; i++) {
+var a=items[i].split("|");
+// alert(a[0])
+// alert($(this).data("id"));
+// alert($(this).val());
+if(a[0]==$(this).data("id")){
+items[i] = a[0]+"|"+$(this).val()+"|"+a[2]+"|"+a[3]
+    //$(this).eq(i).remove(); 
+    //$(this).parent().parent().fadeOut();
+    
+}
+}
+// Don't forget to store the result back in localStorage
+localStorage.setItem("cart",JSON.stringify(items));
+//alert(localStorage.getItem('cart'))
+
+});
+
+
+$('.qty').change(function()//.qty is id of the cahnge column like input number
+
+{
+// alert()
+var qty = $(this).val();//main value were changed in click
+
+// alert($(this).parent().parent().attr('class'))
+var price = $(this).parent().parent().find('.row-price').text();
+//parentof parent were used to check child under 
+//alert(price)
+//var id = $(this).parent().parent().find('.bookd').val();//take book id using class of bookid using  hidden
+//alert(id);
+var total = parseInt(qty)*parseFloat(price);  //parseFloat using for convert to in with fraction
+//alert(total)
+$(this).parent().parent().find('.totaltd').text(total);
+CalculateGrandTotal1();
+
+});
+
+
+
+
+$('#refresh').click(function() {
+
+change_captcha();
+
+});
+
+$('#refresh1').click(function() {
+
+change_captcha();
+
+});
+
+// Don't forget to store the result back in localStorage
+
+});
+
+
+
+function CalculateGrandTotal1()
+       {
+        //alert('total1')
+      var grandTotal = 0;
+        for(item of document.querySelectorAll('.totaltd')) {
+            grandTotal += parseFloat(item.innerText);
+            console.log(grandTotal); 
+       }
+       $("#grandTotal").text(grandTotal);
+        $("#granTotal").html("Grand Total: "+""+ grandTotal);
+  
+       //function for change grand total by using the total column in table
+            }
+
+
+
+
+
+
+// $('#send_order').click(function() {
+
+
+
+// });
+
+
+// $('.wishbtn').click(function() {
+
+//     location.reload(true);
+
+// });
+
+
+$('.mode').change(function() {
+    
+
+if ($(this).val() == "Home-delivery") {
+  alert('Delivery Charges Apply')
+    $('#delcharge').show();
+}
+else{
+     $('#delcharge').hide();
+}
+
+});
+
+//check if mobile column is number
+
+
+    
+// if($('#phone').val() != "") {
+//     alert()
+//     var value = $('#phone').val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+//     var intRegex = /^\d+$/;
+//     if(!intRegex.test(value)) {
+//         alert()
+//         errors += "Field must be numeric.<br/>";
+//         success = false;
+//     }
+// } else {
+//     errors += "Field is blank.</br />";
+//     success = false;
+// }
+
+
+
+
+
+
+
+function change_captcha()
+
+{
+
+    document.getElementById('captcha').src="captcha/get_captcha.php?rnd=" + Math.random();
+}
+
+
+    $('#crud-form').submit(function(e) { 
+        //alert()
+e.preventDefault();
+// alert()
+                $.ajax( {
+
+                url:'pages/includes/sendmail.php',
+
+                type: "POST",
+
+               // dataType: 'json',
+
+                data: $("#crud-form").serialize(),
+      
+                success:function(response) {
+
+                //alert(response.status);
+                
+                console.log(response,response.status);
+
+                if(response.status==1)
+                {
+
+                //$("#code").removeClass('invalid');
+
+                $("#fmesage").html('');
+                $("#fmesage").html('<label class="control-label" id="after_submit" style="color: #1a904a;">You successfully ordered.</label>');
+                setTimeout(function(){
+                $('#after_submit').fadeOut();
+                }, 2000); 
+                
+                localStorage.clear();
+                
+        swal("Successfully Complete Your Order", "Thanks!", "success");
+         setTimeout(function(){
+                window.location="/"
+                }, 3000); 
+          
+               
+                } else if(response.status==0) {
+                //$("#code").removeClass('invalid');              
+
+                $("#fmesage").html('');
+                $("#fmesage").html('<label class="control-label" id="after_submit" style="color:#da1f1f;">An Error Occured, Please Try Again .</label>');
+                setTimeout(function(){
+                $('#after_submit').fadeOut();
+                }, 2000);   
+
+                }
+
+                else{
+                $("#fmesage").html('');
+                $("#fmesage").html('<label class="control-label" id="after_submit" style="color:#da1f1f;">Invalid Captcha ,Please try Again .</label>');
+                setTimeout(function(){
+                $('#after_submit').fadeOut();
+                }, 2000);
+
+                }
+                },
+
+                error:function(e){
+                console.log(e);
+
+                }
+
+                // end of ajax
+                });
+
+//end of button click
+});
+
+//mobile number limit script
+
+$(".maxThirtyChars").keyup(function() {
+    
+if($('#phone').val() != "") {
+  
+    var value = $('#phone').val().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    var intRegex = /^\d+$/;
+    if(!intRegex.test(value)) {
+         alert("Only numeric value are allowed")
+       // errors += "Field must be numeric.<br/>";
+        success = false;
+    }
+} else {
+    errors += "Field is blank.</br />";
+    success = false;
+}
+
+    
+    
+    
+    //alert()
+  var maxChars =12;
+  if ($(this).val().length > maxChars) {
+      $(this).val($(this).val().substr(0, maxChars));
+      //Take action, alert or whatever suits
+ var textstyle=`<strong><label style="font-size:15px;" class="text-danger">This field can take only 12 numbers!</label></strong>`
+        $(".maxThirtyCharsd").html(textstyle).fadeIn('slow');
+        $('.maxThirtyCharsd').hide().fadeIn('medium').delay(2000).hide(1);
+     
+  }
+  
+  
+  
+});
+
+
+
+    
+    
+
+});
+
+
+      
+</script>  
+</html>                                		
